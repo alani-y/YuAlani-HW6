@@ -40,6 +40,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    // deletes the pizza
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            pizzaList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     // prepares the pizza segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "PizzaSegue",
@@ -52,7 +60,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func addPizza(pizza: Pizza){
         pizzaList.append(pizza)
         self.pizzaTableView.reloadData()
-        //print(pizzaList.count)
     }
 }
 
