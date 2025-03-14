@@ -8,6 +8,10 @@
 //
 
 import UIKit
+import CoreData
+
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
 
 protocol addNewPizza {
     func addPizza(pizza: Pizza)
@@ -56,10 +60,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    // adds a pizza to the pizzaList array
+    // adds a pizza to core data
     func addPizza(pizza: Pizza){
         pizzaList.append(pizza)
         self.pizzaTableView.reloadData()
+        
+        let storedPizza = NSEntityDescription.insertNewObject(forEntityName: "Pizza", into: context)
+        
+        storedPizza.setValue(pizza.pSize, forKey: "size")
+        storedPizza.setValue(pizza.crust, forKey: "crust")
+        storedPizza.setValue(pizza.cheese, forKey: "cheese")
+        storedPizza.setValue(pizza.meat, forKey: "meat")
+        storedPizza.setValue(pizza.veggies, forKey: "veggie")
+        
+        saveContext()
+    }
+    
+    // saves the pizza context
+    func saveContext () {
+    
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 }
 
