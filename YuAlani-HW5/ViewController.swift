@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         pizzaTableView.delegate = self
         pizzaTableView.dataSource = self
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,13 +66,54 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         pizzaList.append(pizza)
         self.pizzaTableView.reloadData()
         
-        let storedPizza = NSEntityDescription.insertNewObject(forEntityName: "Pizza", into: context)
+        let storedPizza = NSEntityDescription.insertNewObject(forEntityName: "StoredPizza", into: context)
         
-        storedPizza.setValue(pizza.pSize, forKey: "size")
+        storedPizza.setValue(pizza.pSize, forKey: "pSize")
         storedPizza.setValue(pizza.crust, forKey: "crust")
         storedPizza.setValue(pizza.cheese, forKey: "cheese")
         storedPizza.setValue(pizza.meat, forKey: "meat")
-        storedPizza.setValue(pizza.veggies, forKey: "veggie")
+        storedPizza.setValue(pizza.veggies, forKey: "veggies")
+        
+        //addRetrievedPizzas()
+        
+        saveContext()
+    }
+    
+    func retrievePizza() -> [NSManagedObject]{
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+        var fetchedPizzas:[NSManagedObject]?
+        
+        //let predicate = NSPredicate(format: "name CONTAINS[c] 'ie'")
+        //request.predicate = predicate
+        
+        do {
+            try fetchedPizzas = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            print("Error occurred while retrieving data")
+            abort()
+        }
+        
+        return fetchedPizzas!
+    }
+    
+    // adds the retrieved pizzas to the pizzaList
+    func addRetrievedPizzas() {
+        let fetchedPizzas = retrievePizza()
+        
+        // adds the retrieved pizzas to the pizzaList
+        for storedPizza in fetchedPizzas{
+            guard let pSize = storedPizza.value(forKey: "pSize") as? String,
+                  let pCrust = storedPizza.value(forKey: "crust") as? String,
+                  let pCheese = storedPizza.value(forKey: "cheese") as? String,
+                  let pMeat = storedPizza.value(forKey: "meat") as? String,
+                  let pVeggies = storedPizza.value(forKey: "veggies") as? String
+            else{
+                return
+            }
+            let newPizza = Pizza(pSize: pSize, crust: pCrust, cheese: pCheese, meat: pMeat, veggies: pVeggies)
+            
+            pizzaList.append(newPizza)
+        }
         
         saveContext()
     }
