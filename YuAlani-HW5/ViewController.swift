@@ -9,7 +9,7 @@
 
 import UIKit
 import CoreData
-
+import FirebaseAuth
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -19,7 +19,7 @@ protocol addNewPizza {
 }
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addNewPizza{
-   
+    
     @IBOutlet weak var pizzaTableView: UITableView!
     
     let textCellIdentifier = "TableCell"
@@ -29,9 +29,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //clearCoreData()
         pizzaTableView.delegate = self
         pizzaTableView.dataSource = self
-        
+
+        addRetrievedPizzas()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,9 +50,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // deletes the pizza
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let index = indexPath.row
+        
         if editingStyle == .delete {
-            pizzaList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredPizza")
+            var fetchedRequest: [NSManagedObject]
+            
+            // tries to delete the pizza from core data
+            do {
+                print(index)
+                let predicate = NSPredicate(format: "pSize == %@ AND crust == %@ AND cheese == %@ AND meat == %@ AND veggies == %@",
+                                            pizzaList[index].pSize, pizzaList[index].crust, pizzaList[index].cheese, pizzaList[index].meat, pizzaList[index].veggies)
+                request.predicate = predicate
+                try fetchedRequest = context.fetch(request) as! [NSManagedObject]
+                
+                context.delete(fetchedRequest[0])
+                pizzaList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                print("error happened")
+                abort()
+            }
         }
     }
     
@@ -75,17 +97,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         storedPizza.setValue(pizza.meat, forKey: "meat")
         storedPizza.setValue(pizza.veggies, forKey: "veggies")
         
-        //addRetrievedPizzas()
-        
         saveContext()
     }
     
     func retrievePizza() -> [NSManagedObject]{
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Person")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredPizza")
         var fetchedPizzas:[NSManagedObject]?
-        
-        //let predicate = NSPredicate(format: "name CONTAINS[c] 'ie'")
-        //request.predicate = predicate
         
         do {
             try fetchedPizzas = context.fetch(request) as? [NSManagedObject]
@@ -121,7 +138,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // saves the pizza context
     func saveContext () {
-    
         if context.hasChanges {
             do {
                 try context.save()
@@ -132,6 +148,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // clears the pizzas in core data
+    func clearCoreData(){
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "StoredPizza")
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            // tries to get the fetched results 
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                for result in fetchedResults {
+                    context.delete(result)
+                }
+            }
+            saveContext()
+        }
+        catch{
+            print("error occured while clearing data")
+            abort()
+        }
+    }
     
+    // signs the user out
+    @IBAction func signOutButtonPressed(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            self.dismiss(animated: true)
+        }
+        catch {
+            print("Sign out error")
+        }
+    }
 }
 

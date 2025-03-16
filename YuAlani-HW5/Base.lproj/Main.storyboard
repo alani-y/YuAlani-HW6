@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lKG-zh-YaN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ajV-2E-Cbr">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ClG-uA-KqA">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="44" width="393" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" textLabel="aWB-7R-hcm" style="IBUITableViewCellStyleDefault" id="oHP-Nu-O52">
@@ -50,6 +50,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pizza Order" id="sxS-ds-zur">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="7i2-Gn-jBs">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="WeJ-Y3-S3g">
+                                <rect key="frame" x="16" y="5" width="90" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign Out"/>
+                                <connections>
+                                    <action selector="signOutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ewy-Je-3iQ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hpC-hI-Umn">
                             <connections>
                                 <segue destination="oCW-Az-PdH" kind="show" identifier="PizzaSegue" id="Di3-bk-Wf7"/>
@@ -62,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1907.6335877862596" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="2834.3511450381679" y="-34.507042253521128"/>
         </scene>
         <!--Pizza CreationVC-->
         <scene sceneID="mbq-aO-F6k">
@@ -73,13 +84,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Design a Pizza!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZO-7u-LW3">
-                                <rect key="frame" x="117.66666666666669" y="144" width="158" height="21"/>
+                                <rect key="frame" x="117.66666666666669" y="85" width="158" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LOt-0b-uF8">
-                                <rect key="frame" x="16" y="207" width="361" height="32"/>
+                                <rect key="frame" x="16" y="148" width="361" height="32"/>
                                 <segments>
                                     <segment title="Small"/>
                                     <segment title="Medium"/>
@@ -90,7 +101,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWN-js-HQO">
-                                <rect key="frame" x="8" y="257" width="148" height="35"/>
+                                <rect key="frame" x="8" y="198" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Select Crust"/>
                                 <connections>
@@ -98,7 +109,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T48-cJ-L8T">
-                                <rect key="frame" x="8" y="300" width="148" height="35"/>
+                                <rect key="frame" x="8" y="241" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Select Cheese"/>
                                 <connections>
@@ -106,7 +117,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPb-hn-APn">
-                                <rect key="frame" x="8" y="343" width="148" height="35"/>
+                                <rect key="frame" x="8" y="284" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Select Meat"/>
                                 <connections>
@@ -114,7 +125,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Pa-Ce-YBj">
-                                <rect key="frame" x="8" y="386" width="148" height="35"/>
+                                <rect key="frame" x="8" y="327" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Select Veggies"/>
                                 <connections>
@@ -130,13 +141,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-F4-X5U">
-                                <rect key="frame" x="16" y="178" width="98" height="21"/>
+                                <rect key="frame" x="16" y="119" width="98" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQp-cI-bpc">
-                                <rect key="frame" x="16" y="507.99999999999994" width="213" height="20.333333333333314"/>
+                                <rect key="frame" x="16" y="449" width="213" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -182,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDs-FM-hhU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2816.030534351145" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="3742.7480916030531" y="-35.211267605633807"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="lvo-nP-MPL">
@@ -193,7 +204,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EDP-Vt-ZfI">
-                                <rect key="frame" x="36" y="110" width="320" height="32"/>
+                                <rect key="frame" x="36" y="66" width="320" height="32"/>
                                 <segments>
                                     <segment title="Login"/>
                                     <segment title="Sign Up"/>
@@ -208,11 +219,10 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Sign In"/>
                                 <connections>
                                     <action selector="signInButton:" destination="ajV-2E-Cbr" eventType="touchUpInside" id="qnq-xO-jS0"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="LoginSegue" id="OJH-re-N5C"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWV-1X-END">
-                                <rect key="frame" x="91" y="467" width="211" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWV-1X-END">
+                                <rect key="frame" x="36" y="467" width="320" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -270,36 +280,37 @@
                     </view>
                     <navigationItem key="navigationItem" id="DCM-UZ-BTY"/>
                     <connections>
-                        <outlet property="ConfirmPasswordField" destination="zDM-T2-Knm" id="5Rl-Vj-2Oo"/>
-                        <outlet property="ConfirmPasswordLabel" destination="eHX-pM-Uif" id="NAu-Df-cAY"/>
-                        <outlet property="PasswordField" destination="ekl-eM-PzL" id="lQw-Xz-eyf"/>
-                        <outlet property="SignInButton" destination="Cc3-pA-kkO" id="T5s-Fm-4dn"/>
-                        <outlet property="UserIDField" destination="Gz9-MB-bth" id="ivP-6b-CZ6"/>
+                        <outlet property="confirmPasswordField" destination="zDM-T2-Knm" id="lqI-qW-cwB"/>
+                        <outlet property="confirmPasswordLabel" destination="eHX-pM-Uif" id="iKm-dJ-XxX"/>
                         <outlet property="errorMessage" destination="aWV-1X-END" id="XRe-0m-MMb"/>
+                        <outlet property="passwordField" destination="ekl-eM-PzL" id="OuQ-1H-p8R"/>
+                        <outlet property="signInButton" destination="Cc3-pA-kkO" id="qZK-Le-9tC"/>
                         <outlet property="signInController" destination="EDP-Vt-ZfI" id="Utm-g4-aVd"/>
+                        <outlet property="userIDField" destination="Gz9-MB-bth" id="JrJ-U1-HuS"/>
+                        <segue destination="yfd-C7-Hqx" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="soh-nh-SYk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="70P-Gl-Lfu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1083.206106870229" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="945.80152671755718" y="-35.211267605633807"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="uKY-XO-6Oi">
+        <scene sceneID="lp1-I4-tCI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKG-zh-YaN" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfd-C7-Hqx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pfh-3d-uUT">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cdb-MR-5cN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ajV-2E-Cbr" kind="relationship" relationship="rootViewController" id="4cz-lh-TUb"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="E1Z-TK-Pip"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cJ6-M5-zya" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GS6-5B-3d0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156.4885496183206" y="-35.211267605633807"/>
+            <point key="canvasLocation" x="1907.6335877862596" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>
